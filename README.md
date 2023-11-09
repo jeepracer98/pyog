@@ -31,4 +31,8 @@ PORT = 4444
 with pyog.create_socket(IP, PORT) as sock:
     while True:
         print(pyog.read_outgauge_data(sock))
+	# and/or pyog.read_motionsim_data(sock)
 ```
+
+If you're using both OutGauge and MotionSim, make sure they aren't running on the same
+port.  This will cause the two streams of data to mix together and get garbled.
