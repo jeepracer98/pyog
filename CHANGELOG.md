@@ -2,6 +2,9 @@
 
 
 ### Unreleased
+
+
+### v0.1.1 (2023-11-09)
 * Added support for getting data from MotionSim as well with `read_motionsim_data()`
 * Renamed `read_data()` to `read_outgauge_data()` to contrast with other data
 
