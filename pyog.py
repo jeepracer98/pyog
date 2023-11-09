@@ -123,6 +123,52 @@ def read_outgauge_data(sock: socket.socket, buffer_size: int = 256) -> dict:
     }
 
 
+def read_motionsim_data(sock: socket.socket, buffer_size: int = 256) -> dict:
+    """
+    Reads the data from the socket and returns a dict with all of the information
+    from the MotionSim packet.
+    See: https://documentation.beamng.com/modding/protocols/#motionsim-udp-protocol
+
+    Parameters
+    ----------
+    sock : socket.socket
+        The socket to read data off of
+    buffer_size : int
+        The size of the buffer to read from the socket
+
+    Returns
+    -------
+    parsed_data : dict
+        The data nicely formatted into a dict
+    """
+    raw_data = sock.recvfrom(buffer_size)
+    data = struct.unpack("4sfffffffffffffffffffff", raw_data[0][:88])
+    return {
+        "magic": data[0].decode("utf-8"),
+        "pos_x": data[1],
+        "pos_y": data[2],
+        "pos_z": data[3],
+        "vel_x": data[4],
+        "vel_y": data[5],
+        "vel_z": data[6],
+        "acc_x": data[7],
+        "acc_y": data[8],
+        "acc_z": data[9],
+        "up_vel_x": data[10],
+        "up_vel_y": data[11],
+        "up_vel_z": data[12],
+        "roll_pos": data[13],
+        "pitch_pos": data[14],
+        "yaw_pos": data[15],
+        "roll_rate": data[16],
+        "pitch_rate": data[17],
+        "yaw_rate": data[18],
+        "roll_acc": data[19],
+        "pitch_acc": data[20],
+        "yaw_acc": data[21],
+    }
+
+
 def main():
     """
     Sample test program which will simply output data until you press Ctrl+C
