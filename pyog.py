@@ -52,7 +52,7 @@ def create_socket(ip: str, port: int) -> socket.socket:
 
 def parse_flags(flag_data: int, flag_keys: dict[int, str]) -> dict[str, bool]:
     """
-    Parses DL_x (dash light) flags into their respective booleans
+    Parses flags into their respective booleans
 
     Parameters
     ----------
