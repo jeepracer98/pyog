@@ -80,9 +80,10 @@ def parse_flags(flag_data: int, flag_keys: dict[int, str]) -> dict[str, bool]:
     return result
 
 
-def read_data(sock: socket.socket, buffer_size: int = 256) -> dict:
+def read_outgauge_data(sock: socket.socket, buffer_size: int = 256) -> dict:
     """
     Reads the data from the socket and returns a dict with all of the information
+    from the OutGauge packet.
     See: https://documentation.beamng.com/modding/protocols/#outgauge-udp-protocol
 
     Parameters
@@ -131,7 +132,7 @@ def main():
 
     with create_socket(IP, PORT) as sock:
         while True:
-            print(json.dumps(read_data(sock), indent=2))
+            print(json.dumps(read_outgauge_data(sock)))
 
 
 if __name__ == "__main__":

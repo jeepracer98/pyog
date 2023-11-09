@@ -30,5 +30,5 @@ PORT = 4444
 
 with pyog.create_socket(IP, PORT) as sock:
     while True:
-        print(pyog.read_data(sock))
+        print(pyog.read_outgauge_data(sock))
 ```
